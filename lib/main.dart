@@ -1,9 +1,13 @@
+import 'package:firebase_core/firebase_core.dart'; // Importar Firebase core
 import 'package:flutter/material.dart';
 import 'screens/home_screen.dart';
 import 'screens/login_screen.dart'; // Importa LoginScreen
 import 'screens/signup_screen.dart'; // Importa SignUpScreen
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding
+      .ensureInitialized(); // Asegura la inicialización de widgets
+  await Firebase.initializeApp(); // Inicializa Firebase
   runApp(const MyApp());
 }
 

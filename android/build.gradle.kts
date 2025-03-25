@@ -1,6 +1,6 @@
 allprojects {
     repositories {
-        google()
+        google()  // Repositorio para dependencias de Firebase y Google Services
         mavenCentral()
     }
 }
@@ -16,6 +16,18 @@ subprojects {
     project.evaluationDependsOn(":app")
 }
 
+buildscript {
+    repositories {
+        google()  // Importante: Agrega esto
+        mavenCentral()
+    }
+    dependencies {
+        classpath("com.android.tools.build:gradle:8.1.1")  // Ajusta la versión si es necesario
+        classpath("com.google.gms:google-services:4.4.2")  // Complemento para Firebase
+    }
+}
+
 tasks.register<Delete>("clean") {
     delete(rootProject.layout.buildDirectory)
 }
+

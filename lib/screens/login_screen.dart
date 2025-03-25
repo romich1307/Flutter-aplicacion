@@ -1,7 +1,31 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
+
+  Future<void> signInWithGoogle() async {
+    try {
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+      if (googleUser != null) {
+        final GoogleSignInAuthentication googleAuth =
+            await googleUser.authentication;
+
+        final credential = GoogleAuthProvider.credential(
+          accessToken: googleAuth.accessToken,
+          idToken: googleAuth.idToken,
+        );
+
+        // Inicia sesión con Firebase usando las credenciales de Google
+        await FirebaseAuth.instance.signInWithCredential(credential);
+        print("Inicio de sesión exitoso con Google");
+      }
+    } catch (e) {
+      print("Error durante el inicio de sesión con Google: $e");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +43,7 @@ class LoginScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(100),
                   child: Image.asset(
                     'assets/cuentas.PNG',
-                    height: 150, // Imagen un poco más grande
+                    height: 150,
                     width: 150,
                     fit: BoxFit.cover,
                   ),
@@ -101,8 +125,7 @@ class LoginScreen extends StatelessWidget {
                 const SizedBox(height: 10),
                 TextButton(
                   onPressed: () {
-                    Navigator.pushNamed(
-                        context, '/signup'); // Navega a la pantalla de registro
+                    Navigator.pushNamed(context, '/signup');
                   },
                   child: const Text(
                     "Don't have an account? Sign up.",
@@ -115,14 +138,17 @@ class LoginScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    ClipOval(
-                      child: Container(
-                        color: Colors.green[50],
-                        padding: const EdgeInsets.all(8),
-                        child: Image.asset(
-                          'assets/google_icon.png',
-                          width: 40,
-                          height: 40,
+                    GestureDetector(
+                      onTap: signInWithGoogle,
+                      child: ClipOval(
+                        child: Container(
+                          color: Colors.green[50],
+                          padding: const EdgeInsets.all(8),
+                          child: Image.asset(
+                            'assets/google_icon.png',
+                            width: 40,
+                            height: 40,
+                          ),
                         ),
                       ),
                     ),
