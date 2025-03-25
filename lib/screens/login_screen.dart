@@ -14,17 +14,19 @@ class LoginScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // Imagen en la parte superior
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
+                // Imagen redondeada en la parte superior
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(100),
                   child: Image.asset(
                     'assets/cuentas.PNG',
-                    height: 150,
+                    height: 150, // Imagen un poco más grande
+                    width: 150,
+                    fit: BoxFit.cover,
                   ),
                 ),
                 const SizedBox(height: 20),
+
+                // Título 'Login'
                 const Text(
                   'Login',
                   style: TextStyle(
@@ -34,6 +36,7 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 20),
+
                 // Campo de texto para el usuario
                 TextField(
                   decoration: InputDecoration(
@@ -47,6 +50,7 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 15),
+
                 // Campo de texto para la contraseña
                 TextField(
                   obscureText: true,
@@ -61,6 +65,8 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 20),
+
+                // Botón de Login
                 ElevatedButton(
                   onPressed: () {
                     // Acción del botón Login
@@ -83,6 +89,7 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                 ),
+
                 const SizedBox(height: 10),
                 TextButton(
                   onPressed: () {},
@@ -93,35 +100,54 @@ class LoginScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 10),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(
+                        context, '/signup'); // Navega a la pantalla de registro
+                  },
                   child: const Text(
                     "Don't have an account? Sign up.",
                     style: TextStyle(color: Colors.black54),
                   ),
                 ),
                 const SizedBox(height: 20),
+
+                // Filas de íconos de redes sociales
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    IconButton(
-                      onPressed: () {},
-                      icon: Image.asset(
-                        'assets/google_icon.png',
-                        height: 40,
+                    ClipOval(
+                      child: Container(
+                        color: Colors.green[50],
+                        padding: const EdgeInsets.all(8),
+                        child: Image.asset(
+                          'assets/google_icon.png',
+                          width: 40,
+                          height: 40,
+                        ),
                       ),
                     ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: Image.asset(
-                        'assets/linkedin_icon.png',
-                        height: 40,
+                    const SizedBox(width: 10),
+                    ClipOval(
+                      child: Container(
+                        color: Colors.green[50],
+                        padding: const EdgeInsets.all(8),
+                        child: Image.asset(
+                          'assets/linkedin_icon.png',
+                          width: 40,
+                          height: 40,
+                        ),
                       ),
                     ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: Image.asset(
-                        'assets/facebook_icon.png',
-                        height: 40,
+                    const SizedBox(width: 10),
+                    ClipOval(
+                      child: Container(
+                        color: Colors.green[50],
+                        padding: const EdgeInsets.all(8),
+                        child: Image.asset(
+                          'assets/facebook_icon.png',
+                          width: 40,
+                          height: 40,
+                        ),
                       ),
                     ),
                   ],

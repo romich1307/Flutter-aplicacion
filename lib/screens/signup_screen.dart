@@ -6,10 +6,7 @@ class SignUpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Sign Up'),
-        backgroundColor: const Color(0xFF9EB998),
-      ),
+      backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Center(
@@ -17,6 +14,19 @@ class SignUpScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                // Imagen redondeada y más grande en la parte superior
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(100),
+                  child: Image.asset(
+                    'assets/cuentas.PNG', // Path de tu imagen
+                    width: 150,
+                    height: 150, // Ajuste para hacerla más grande
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                const SizedBox(height: 20),
+
+                // Título 'Sign Up'
                 const Text(
                   'Sign Up',
                   style: TextStyle(
@@ -26,6 +36,8 @@ class SignUpScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 20),
+
+                // Campos de texto (Username, Email, Password)
                 TextField(
                   decoration: InputDecoration(
                     hintText: 'Enter your username',
@@ -63,9 +75,11 @@ class SignUpScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 20),
+
+                // Botón 'Register'
                 ElevatedButton(
                   onPressed: () {
-                    // Acción al registrar usuario (por ahora no hace nada)
+                    // Acción al registrar usuario
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF9EB998),
@@ -82,6 +96,22 @@ class SignUpScreen extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 18,
                       color: Color(0xFFF5F5DC),
+                    ),
+                  ),
+                ),
+
+                const SizedBox(height: 15),
+
+                // Texto 'Already have an account? Login.'
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, '/login');
+                  },
+                  child: const Text(
+                    "Already have an account? Login.",
+                    style: TextStyle(
+                      color: Colors.blueGrey,
+                      decoration: TextDecoration.underline,
                     ),
                   ),
                 ),
